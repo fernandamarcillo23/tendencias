@@ -1,0 +1,52 @@
+/* Paleta de color rosita pastel y limpio */
+:root {
+  --color-pink: #d85d88;
+  --color-pink-hover: #c44d77;
+  --color-pink-light: #fdf2f4;
+  --bg-page: #fbf6f7;
+}
+
+body {
+  background-color: var(--bg-page);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333333;
+}
+
+/* Clases rositas para Bootstrap */
+.bg-pink {
+  background-color: var(--color-pink) !important;
+}
+
+.text-pink {
+  color: var(--color-pink) !important;
+}
+
+.btn-pink {
+  background-color: var(--color-pink) !important;
+  border-color: var(--color-pink) !important;
+  color: #ffffff !important;
+}
+
+.btn-pink:hover,
+.btn-pink:focus {
+  background-color: var(--color-pink-hover) !important;
+  border-color: var(--color-pink-hover) !important;
+}
+
+.btn-pink:disabled {
+  background-color: #e8a7be !important;
+  border-color: #e8a7be !important;
+  cursor: not-allowed;
+}
+
+/* Enfoque de campos con tono rosita */
+.form-control:focus,
+.form-select:focus {
+  border-color: #e8a7be !important;
+  box-shadow: 0 0 0 0.25rem rgba(216, 93, 136, 0.2) !important;
+}
+
+/* Borde sutil en tarjetas */
+.card {
+  border: 1px solid #f1dbe2 !important;
+}

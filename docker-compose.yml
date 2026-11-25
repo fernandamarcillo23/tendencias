@@ -1,0 +1,53 @@
+services:
+  # Contenedor 1: Base de datos PostgreSQL
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: formulariodb
+    volumes:
+      # Volumen para persistencia de la base de datos
+      - volumen_postgres:/var/lib/postgresql/data
+    networks:
+      # Conectado a la red interna
+      - red_formulario
+    # (Opcional) Si deseas acceder a Postgres desde tu máquina:
+    # ports:
+    #   - "5432:5432"
+
+  # Contenedor 2: Aplicación Web (React + Express API)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: react_app
+    restart: always
+    ports:
+      # Expone el puerto 3001 hacia el puerto 3000 interno del contenedor
+      - "3001:3000"
+    environment:
+      - PORT=3000
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=admin
+      - DB_PASSWORD=password123
+      - DB_NAME=formulariodb
+    depends_on:
+      - db
+    networks:
+      # Conectado a la misma red interna para comunicarse con 'db'
+      - red_formulario
+
+# Definición explícita del volumen
+volumes:
+  volumen_postgres:
+    name: volumen_postgres
+
+# Definición explícita de la red
+networks:
+  red_formulario:
+    name: red_formulario
+    driver: bridge
